@@ -30,8 +30,8 @@ library(e1071)
 picture of the stock price
 
 
-```{r fig.cap="HP price", echo=FALSE, out.width="100%"}
-knitr::include_graphics("HDprice.png")
+```{r fig.cap="TESLA Price", echo=FALSE, out.width="100%"}
+knitr::include_graphics("Tesla price.png")
 ```
 
 
@@ -241,14 +241,14 @@ grid()
 
   1. Training and Test sets:    
 <!--    What percent of the stock data did you use for the training set?  How did you select the training set size?  
-
+I used 70% of the data setfor my training set. By Chronological order.
 
     Did you select the training set to be the chronological first data observations, and the test set to be the following observations, or did you choose to randomly sample the stock data to get the training set and use the remaining observations for the test set?  Justification for your choice? !-->  
     
   2. How well did the SVM do?  
 <!-- show the table of predicted vs truth for the whole data set, and then the same table for predicted vs actual results for just the test set.  !-->
 
-Did not do well.. 
+The SVM did not do well in predictions. 
 
   3. Tune the algorithm- i.e. find optimal gamma and cost values.  <!--Use these valuse to recompute the table of predicted vs actual results for the test set. !-->
   
