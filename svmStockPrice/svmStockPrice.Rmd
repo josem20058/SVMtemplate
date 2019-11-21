@@ -1,7 +1,7 @@
 ---
 title: "SVM project"
-author: "MGMT6770"
-date: "9/23/2019"
+author: "Jose Muralles"
+date: "9/27/2019"
 output: 
   html_document:
     toc: true
@@ -21,16 +21,27 @@ knitr::opts_chunk$set(echo = TRUE)
 library(e1071)
 ```
 
+```{r}
+
+```
+
+
+
 ## get data:
 
+Names of variables in Tesla Data
+price.open	price.high	price.low	price.close	volume	price.adjusted	ref.date	ticker	ret.adjusted.prices	ret.closing.prices	avgChange	Change
+
+
 ```{r}
-slpData = read.csv('SLPtrimmed.csv')
-attach(slpData)
+#TeslaData = read.csv('TSLAstockprice Trimmed.csv')
+TeslaData=read.csv('SLPtrimmed.csv')
+attach(TeslaData)
 # set up data frame
-slpDataFrame = data.frame(open=price.open, high=price.high,
-        low=price.low, close=price.adjusted,volume= volume/10000, avg_change=avg_change, change = changeCategory )
-head(slpDataFrame)
-remove(slpData)
+TeslaDataFrame = data.frame(open=price.open, high=price.high,
+        low=price.low, close=price.close,volume= volume/10000, avg_change=avgChange, change = Change )
+head(TeslaDataFrame)
+remove(TeslaData)
 
 ```
 
@@ -43,8 +54,8 @@ plot(slpDataFrame)
 
 ### traditional interface:
 ```{r}
-x <- subset(slpDataFrame, select = -change)
-y <- slpDataFrame$change
+x <- subset(TeslaDataFrame, select = -change)
+y <- TeslaDataFrame$change
 model1 <- svm(x, y) 
 
 print(model1)
@@ -70,8 +81,8 @@ pred <- predict(model1, x, decision.values = TRUE)
 attr(pred, "decision.values")[1:6,]
 
 # visualize (classes by color, SV by crosses):
-plot(cmdscale(dist(slpDataFrame[,-7])),
-     col = as.integer(slpDataFrame[,7]),xlab="normalized X", ylab = "$ change",
+plot(cmdscale(dist(TeslaDataFrame[,-7])),
+     col = as.integer(TeslaDataFrame[,7]),xlab="normalized X", ylab = "$ change",
      pch = c("o","+")[1:150 %in% model1$index + 1])
 legend('bottomleft',c('data','prediction'),pch=c('0','+'))
 grid()
